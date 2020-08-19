@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">HomeServ</string>
+
+    <!--Login and SignUp-->
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="sing">Signup</string>
+    <string name="spinner_title">Select Area</string>
+    <string name="login_here">Login Here</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="generate_otp">Generate OTP</string>
+
+    <!--Location picker-->
+    <string name="action_geolocate">Pick Place</string>
+    <string name="default_info_title">Default Location</string>
+    <string name="default_info_snippet">No places found, because location permission is disabled.</string>
+
+
+    <!--    <string name="google_api_key">AIzaSyArEqk_s3JVN9NfHIlvx2rkpPCs8lnKxJA</string>-->
+
+    <string-array name="ccode">
+        <item>+91</item>
+    </string-array>
+
+    <string-array name="genderArray">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="cityArray">
+        <item>Guwahati</item>
+    </string-array>
+    <string name="title_activity_map">Map</string>
+</resources>

@@ -1,0 +1,24 @@
+package com.khurshid.kamkora.utils;
+
+import android.view.View;
+import android.widget.ProgressBar;
+
+public class ProgressBarManager {
+
+    public static void startProgressBar(ProgressBar progressBar) {
+        if (progressBar.getVisibility() == View.GONE) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    public static void stopProgressBar(ProgressBar progressBar) {
+        if (progressBar.getVisibility() == View.VISIBLE) {
+            progressBar.setVisibility(View.GONE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+}
