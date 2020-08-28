@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.khurshid.kamkora.R;
 import com.khurshid.kamkora.model.AddToCart;
 import com.khurshid.kamkora.model.Order;
+import com.khurshid.kamkora.model.SubService;
 import com.khurshid.kamkora.utils.CentralData;
 import com.khurshid.kamkora.view.adapters.CartRecyclerViewAdapter;
 
@@ -32,6 +33,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     private String addToCartJson;
     private RecyclerView rvCart;
     private CartRecyclerViewAdapter adapter;
+    private SubService subService;
 
     @Override
 
@@ -71,7 +73,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     private void initRecyclerView() {
         Log.d(MYTAG, "Size of orders: " + CentralData.getCartList().size());
         adapter = new CartRecyclerViewAdapter(CentralData.getCartList());
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         rvCart.setLayoutManager(manager);
         rvCart.setAdapter(adapter);
     }

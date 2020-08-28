@@ -1,7 +1,10 @@
 package com.khurshid.kamkora.view.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +16,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.khurshid.kamkora.R;
 import com.khurshid.kamkora.model.User;
 import com.khurshid.kamkora.utils.SessionManager;
 import com.khurshid.kamkora.view.activities.DashboardActivity;
 import com.khurshid.kamkora.view.activities.LoginActivity;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
-import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
+
+    private static final String MYTAG = ProfileFragment.class.getSimpleName();
 
     //    @BindView(R.id.bt_profile_login)
 //    Button btLogin;
@@ -31,20 +39,23 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 //    Button btLogout;
     //
 //    @BindView(R.id.textView)
-    TextView tvText;
+//    TextView tvText;
 
     private String stUser = null;
     private LinearLayout lvNotLoggedIn, lvLoggedIn;
     private Button btProfileLogout, btProfileLogin;
     private User currentUser;
-    private TextView tvProfileName, tvProfileEmail, tvProfileGender, tvProfileCity;
+    private TextView tvProfileName, tvProfileEmail,
+            tvProfileGender, tvProfileCity, tvAge;
+    private CircleImageView ivAvatar;
+    private Uri imageUri;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
-        ButterKnife.bind(getActivity());
+//        ButterKnife.bind(getActivity());
         initView(v);
         return v;
     }
@@ -54,13 +65,16 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         lvLoggedIn = v.findViewById(R.id.lvLoggedIn);
         btProfileLogin = v.findViewById(R.id.bt_profile_login);
         btProfileLogout = v.findViewById(R.id.bt_profile_logout);
-        tvText = v.findViewById(R.id.textView);
+//        tvText = v.findViewById(R.id.textView);
         tvProfileName = v.findViewById(R.id.tvProfileName);
         tvProfileEmail = v.findViewById(R.id.tvProfileEmail);
         tvProfileGender = v.findViewById(R.id.tvProfileGender);
-        tvProfileCity = v.findViewById(R.id.tvProfileCity);
+        tvAge = v.findViewById(R.id.tvProfileAge);
+        ivAvatar = v.findViewById(R.id.iv_profile_fragment_avatar);
+//        tvProfileCity = v.findViewById(R.id.tvProfileCity);
         btProfileLogin.setOnClickListener(this);
         btProfileLogout.setOnClickListener(this);
+        ivAvatar.setOnClickListener(this);
     }
 
     @Override
@@ -69,7 +83,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         if (!SessionManager.isLoggedIn(getActivity())) {
             lvLoggedIn.setVisibility(View.GONE);
             lvNotLoggedIn.setVisibility(View.VISIBLE);
-            tvText.setText("Login Please");
         } else if (SessionManager.isLoggedIn(getActivity())) {
 
             String userJson = SessionManager.getUserObjectJson(getActivity());
@@ -84,8 +97,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 tvProfileEmail.setText(currentUser.getEmail());
             if (currentUser.getGender() != null)
                 tvProfileGender.setText(currentUser.getGender());
-            if (currentUser.getCity() != null)
-                tvProfileCity.setText(currentUser.getCity());
+            if (currentUser.getCity() != null) ;
+//                tvProfileCity.setText(currentUser.getCity());
         }
     }
 
@@ -103,5 +116,38 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             startActivity(intent);
             getActivity().finish();
         }
+
+        if (v.getId() == R.id.iv_profile_fragment_avatar) {
+            pickImageAndCrop();
+        }
+    }
+
+    private void pickImageAndCrop() {
+        CropImage
+                .activity()
+                .setGuidelines(CropImageView.Guidelines.ON)
+                .setAspectRatio(1, 1)
+                .start(getContext(), this);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == Activity.RESULT_OK) {
+                imageUri = result.getUri();
+                displayImage();
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Log.e(MYTAG, "Image crop error: " + result.getError().getMessage());
+            }
+        }
+    }
+
+    private void displayImage() {
+
+        Glide.with(getActivity())
+                .load(imageUri)
+                .into(ivAvatar);
     }
 }

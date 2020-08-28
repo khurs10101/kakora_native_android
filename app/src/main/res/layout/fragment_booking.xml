@@ -42,42 +42,48 @@
 
         <ProgressBar
             android:id="@+id/pbBooking"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_gravity="center" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_bookings"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/sr_fragment_booking"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!--            <LinearLayout-->
-            <!--                android:id="@+id/lv_no_bookings"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="match_parent"-->
-            <!--                android:gravity="center"-->
-            <!--                android:orientation="vertical">-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_bookings"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <!--                <ImageView-->
-            <!--                    android:layout_width="300dp"-->
-            <!--                    android:layout_height="300dp"-->
-            <!--                    android:layout_gravity="center"-->
-            <!--                    android:src="@drawable/not_found_1" />-->
+                <!--            <LinearLayout-->
+                <!--                android:id="@+id/lv_no_bookings"-->
+                <!--                android:layout_width="match_parent"-->
+                <!--                android:layout_height="match_parent"-->
+                <!--                android:gravity="center"-->
+                <!--                android:orientation="vertical">-->
 
-            <!--                <TextView-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:fontFamily="@font/coresans_cr_medium"-->
-            <!--                    android:gravity="center"-->
-            <!--                    android:text="No Bookings yet"-->
-            <!--                    android:textSize="40sp"-->
-            <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                    app:layout_constraintTop_toTopOf="parent"-->
-            <!--                    tools:layout_editor_absoluteX="38dp" />-->
+                <!--                <ImageView-->
+                <!--                    android:layout_width="300dp"-->
+                <!--                    android:layout_height="300dp"-->
+                <!--                    android:layout_gravity="center"-->
+                <!--                    android:src="@drawable/not_found_1" />-->
 
-            <!--            </LinearLayout>-->
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:fontFamily="@font/coresans_cr_medium"-->
+                <!--                    android:gravity="center"-->
+                <!--                    android:text="No Bookings yet"-->
+                <!--                    android:textSize="40sp"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                    app:layout_constraintTop_toTopOf="parent"-->
+                <!--                    tools:layout_editor_absoluteX="38dp" />-->
 
-        </androidx.recyclerview.widget.RecyclerView>
+                <!--            </LinearLayout>-->
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 

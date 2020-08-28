@@ -8,5 +8,7 @@
     <color name="colorGrey1">#888888</color>
     <color name="colorGrey2">#5A5A5A</color>
     <color name="colorBalck">#1d2021</color>
-    <color name="colorRad">#d71c32</color>
+    <color name="colorRad">#FF001E</color>
+    <color name="navy_blue">#2f6699</color>
+    <color name="colorGreen">#3CA641</color>
 </resources>

@@ -8,8 +8,8 @@
         android:id="@+id/ivAds"
         android:layout_width="400dp"
         android:layout_height="220dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:src="@drawable/ads1" />
 
 

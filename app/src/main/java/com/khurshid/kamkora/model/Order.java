@@ -33,6 +33,44 @@ public class Order implements Serializable {
     @Expose
     private String docketId;
 
+    private String subServiceId;
+
+    private String url;
+    private int sampleImage;
+    private String subServiceName;
+
+    public String getSubServiceId() {
+        return subServiceId;
+    }
+
+    public void setSubServiceId(String subServiceId) {
+        this.subServiceId = subServiceId;
+    }
+
+    public String getSubServiceName() {
+        return subServiceName;
+    }
+
+    public void setSubServiceName(String subServiceName) {
+        this.subServiceName = subServiceName;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public int getSampleImage() {
+        return sampleImage;
+    }
+
+    public void setSampleImage(int sampleImage) {
+        this.sampleImage = sampleImage;
+    }
+
     public String getUpdatedAt() {
         return updatedAt;
     }

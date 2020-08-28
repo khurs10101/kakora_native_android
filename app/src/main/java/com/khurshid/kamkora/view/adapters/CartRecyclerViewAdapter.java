@@ -27,14 +27,15 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View v = inflater.inflate(R.layout.single_item_cart, null);
+        View v = inflater.inflate(R.layout.single_item_cart, parent, false);
         return new MyViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.tvService.setText(orders.get(position).getServiceId());
-        holder.tvRate.setText(orders.get(position).getRate());
+        holder.tvRate.setText("Rs " + orders.get(position).getRate() + " per hour");
+        holder.ivImage.setImageResource(orders.get(position).getSampleImage());
         holder.ivRemove.setOnClickListener(v -> {
             orders.remove(position);
             notifyDataSetChanged();
@@ -48,13 +49,14 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvService, tvRate;
-        ImageView ivRemove;
+        ImageView ivRemove, ivImage;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvService = itemView.findViewById(R.id.tv_cart_single_item_service);
             tvRate = itemView.findViewById(R.id.tv_cart_single_item_rate);
             ivRemove = itemView.findViewById(R.id.tv_cart_single_item_delete);
+            ivImage = itemView.findViewById(R.id.iv_single_cart_image);
         }
     }
 }

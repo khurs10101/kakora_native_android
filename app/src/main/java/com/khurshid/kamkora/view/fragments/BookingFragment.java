@@ -10,8 +10,10 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -22,6 +24,7 @@ import com.khurshid.kamkora.model.OrderSingleUserModelResponse;
 import com.khurshid.kamkora.utils.ProgressBarManager;
 import com.khurshid.kamkora.utils.SessionManager;
 import com.khurshid.kamkora.view.adapters.BookingRecyclerViewAdapter;
+import com.khurshid.kamkora.view.alertdialog.DialogInfo;
 
 import java.util.List;
 
@@ -36,6 +39,7 @@ public class BookingFragment extends Fragment {
     private BookingRecyclerViewAdapter adapter;
     private List<Order> orderList;
     private ProgressBar pb;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
@@ -43,12 +47,16 @@ public class BookingFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_booking, container, false);
         recyclerView = v.findViewById(R.id.rv_bookings);
         pb = v.findViewById(R.id.pbBooking);
+        swipeRefreshLayout = v.findViewById(R.id.sr_fragment_booking);
         return v;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            getBookingDataFromServer();
+        });
         getBookingDataFromServer();
     }
 
@@ -65,12 +73,12 @@ public class BookingFragment extends Fragment {
             call.enqueue(new Callback<JsonObject>() {
                 @Override
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                    swipeRefreshLayout.setRefreshing(false);
                     ProgressBarManager.stopProgressBar(pb);
                     if (response.code() == 200) {
                         Gson gson = new Gson();
                         OrderSingleUserModelResponse orderSingleUserModelResponse;
                         orderSingleUserModelResponse = gson.fromJson(response.body(), OrderSingleUserModelResponse.class);
-
                         prepareRecyclerView(orderSingleUserModelResponse.getOrders());
 
                     }
@@ -78,6 +86,7 @@ public class BookingFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<JsonObject> call, Throwable t) {
+                    swipeRefreshLayout.setRefreshing(false);
                     ProgressBarManager.stopProgressBar(pb);
                     Log.d(MYTAG, "Booking error: " + t.getMessage());
                 }
@@ -86,6 +95,11 @@ public class BookingFragment extends Fragment {
     }
 
     private void prepareRecyclerView(List<Order> orders) {
+        if (orders.size() == 0) {
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            DialogInfo dialogInfo = DialogInfo.newInstance("No Bookings Found");
+            dialogInfo.show(fragmentManager, "DialogInfo");
+        }
         adapter = new BookingRecyclerViewAdapter(orders);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);

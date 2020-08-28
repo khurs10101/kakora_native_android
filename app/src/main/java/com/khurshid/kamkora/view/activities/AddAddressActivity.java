@@ -7,12 +7,15 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -20,6 +23,8 @@ import com.khurshid.kamkora.R;
 import com.khurshid.kamkora.api.ApiClient;
 import com.khurshid.kamkora.model.Address;
 import com.khurshid.kamkora.model.AddressSingleModelResponse;
+import com.khurshid.kamkora.model.LocalLocation;
+import com.khurshid.kamkora.utils.ProgressBarManager;
 import com.khurshid.kamkora.utils.SessionManager;
 
 import butterknife.BindView;
@@ -54,13 +59,16 @@ public class AddAddressActivity extends AppCompatActivity implements View.OnClic
 
     @BindView(R.id.tv_save_address)
     TextView btAddAddress;
-
+    @BindView(R.id.lvAddressSaveButton)
+    LinearLayout lvSaveButton;
+    @BindView(R.id.pbAddressSave)
+    ProgressBar pb;
     private Address address;
-
     private String stName, stHouseNo, stSociety,
             stAddressLine1, getStAddressLine2,
             stLocation, stCity, stState, stPincode;
-
+    private LatLng latLng;
+    private LocalLocation localLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +108,8 @@ public class AddAddressActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void prepareParams() {
+        lvSaveButton.setVisibility(View.GONE);
+        ProgressBarManager.startProgressBar(pb);
         if (SessionManager.isLoggedIn(this)) {
 
             Gson gson = new Gson();
@@ -111,6 +121,8 @@ public class AddAddressActivity extends AppCompatActivity implements View.OnClic
             call.enqueue(new Callback<JsonObject>() {
                 @Override
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                    lvSaveButton.setVisibility(View.VISIBLE);
+                    ProgressBarManager.stopProgressBar(pb);
                     if (response.code() == 201) {
                         Log.d(MYTAG, "Body: " + response.body());
                         AddressSingleModelResponse addressSingleModelResponse;
@@ -131,6 +143,8 @@ public class AddAddressActivity extends AppCompatActivity implements View.OnClic
 
                 @Override
                 public void onFailure(Call<JsonObject> call, Throwable t) {
+                    lvSaveButton.setVisibility(View.VISIBLE);
+                    ProgressBarManager.stopProgressBar(pb);
                     Log.d(MYTAG, "error saving address: " + t.getMessage());
                 }
             });
@@ -195,6 +209,11 @@ public class AddAddressActivity extends AppCompatActivity implements View.OnClic
             count++;
         }
 
+        if (localLocation != null) {
+            address.setLatitude(String.valueOf(localLocation.getLatitude()));
+            address.setLongitude(String.valueOf(localLocation.getLongitude()));
+        }
+
         return count;
     }
 
@@ -210,6 +229,7 @@ public class AddAddressActivity extends AppCompatActivity implements View.OnClic
 
     private void fillTheAddressFields(Intent data) {
         stLocation = data.getStringExtra("getLocation");
+        localLocation = (LocalLocation) data.getSerializableExtra("getLocationObject");
         String[] locationList = TextUtils.split(stLocation, ",");
 
 //        stPincode = locationList[locationList.length - 1];

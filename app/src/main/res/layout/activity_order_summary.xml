@@ -32,24 +32,32 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_map" />
+
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/coresans_cr_medium"
             android:text="Delivered To:"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/tv_summary_order_address"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginLeft="15dp"
-
             android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
             android:text="Delivered To:"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <ProgressBar
             android:id="@+id/pv_summary_progress_bar"

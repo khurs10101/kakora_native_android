@@ -38,6 +38,7 @@ import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.khurshid.kamkora.R;
+import com.khurshid.kamkora.model.LocalLocation;
 
 import java.util.Arrays;
 import java.util.List;
@@ -87,6 +88,11 @@ public class MapLocationPickerActivity extends AppCompatActivity implements OnMa
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(markerLatLng));
                 Intent intent = new Intent();
                 intent.putExtra("getLocation", mLikelyPlaceAddresses[position]);
+                LocalLocation localLocation = new LocalLocation();
+                localLocation.setLikelyAddress(mLikelyPlaceAddresses[position]);
+                localLocation.setLatitude(markerLatLng.latitude);
+                localLocation.setLongitude(markerLatLng.longitude);
+                intent.putExtra("getLocationObject", localLocation);
                 activity.setResult(RESULT_OK, intent);
                 activity.finish();
             };

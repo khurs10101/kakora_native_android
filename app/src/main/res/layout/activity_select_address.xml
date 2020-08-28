@@ -2,28 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:layout_weight="2"
     android:orientation="vertical">
 
-
-    <!-- TODO: Update blank fragment layout -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvAddressList"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/sr_address_select"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvAddressList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
     <TextView
         android:id="@+id/tv_add_new_address"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_margin="15dp"
+        android:layout_height="50dp"
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"
+        android:layout_marginBottom="18dp"
         android:background="@drawable/rounded_green2"
         android:gravity="center"
         android:text="Add another address"
         android:textColor="@color/colorWhite"
         android:textSize="21dp" />
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:orientation="vertical">-->
+
+
+    <!--    </LinearLayout>-->
 </LinearLayout>

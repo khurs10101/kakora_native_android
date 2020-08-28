@@ -57,7 +57,9 @@ public class OrderSummaryActivity extends AppCompatActivity implements View.OnCl
         btPlaceOrder.setOnClickListener(this);
         btCancelOrder.setOnClickListener(this);
         if (address != null) {
-            tvAddress.setText(address.getCity() + "\n"
+            tvAddress.setText(address.getName() + "\n" + address.getAddressLine1() + "\n"
+                    + address.getAddressLine2() + "\n"
+                    + address.getCity() + "\n"
                     + address.getState()
                     + "\n" + address.getPincode());
         }

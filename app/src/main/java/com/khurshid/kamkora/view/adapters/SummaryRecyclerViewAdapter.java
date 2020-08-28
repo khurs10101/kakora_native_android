@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,7 +41,8 @@ public class SummaryRecyclerViewAdapter extends RecyclerView.Adapter<SummaryRecy
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         holder.tvService.setText(orderList.get(position).getServiceId());
-        holder.tvRate.setText(orderList.get(position).getRate());
+        holder.tvRate.setText("Rate: Rs. " + orderList.get(position).getRate() + " per hour");
+        holder.ivServiceImage.setImageResource(orderList.get(position).getSampleImage());
 
     }
 
@@ -51,11 +53,13 @@ public class SummaryRecyclerViewAdapter extends RecyclerView.Adapter<SummaryRecy
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvService, tvRate;
+        ImageView ivServiceImage;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvService = itemView.findViewById(R.id.tv_summary_single_item_service);
             tvRate = itemView.findViewById(R.id.tv_summary_single_item_rate);
+            ivServiceImage = itemView.findViewById(R.id.iv_single_summary_image);
         }
     }
 }

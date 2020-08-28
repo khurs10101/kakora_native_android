@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    android:backgroundTint="#e6feff"
+
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".view.activities.SplashScreen">
@@ -14,9 +14,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:adjustViewBounds="true"
-        android:backgroundTint="#e6feff"
         android:scaleType="fitCenter"
-        android:src="@drawable/homeserv_non" />
+        android:src="@drawable/home_serv" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/coresans_cr_medium"
+        android:text="\u00a9 2020 OTechnix" />
 
     <!--    <TextView-->
     <!--        android:fontFamily="@font/coresans_cr_medium"-->

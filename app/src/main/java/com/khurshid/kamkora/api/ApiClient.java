@@ -13,6 +13,8 @@ public class ApiClient {
     public static final String APPEND_URL_USER = "/api/users/";
     public static final String APPEND_URL_ORDER = "/api/orders/";
     public static final String APPEND_URL_ADDRESS = "/api/address/";
+    public static final String APPEND_URL_SERVICE = "/api/services/";
+    public static final String APPEND_URL_ADS = "/api/ads/";
     //    public static String Base_URL = "http://192.168.43.61:5000";
 //    public static String Base_URL = "http://192.168.43.1:5000";
     public static String Base_URL = "http://3.133.110.209:5000";

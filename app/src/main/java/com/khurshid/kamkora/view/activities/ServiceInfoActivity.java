@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -19,9 +21,11 @@ import com.khurshid.kamkora.api.ApiClient;
 import com.khurshid.kamkora.model.AddOrderModel;
 import com.khurshid.kamkora.model.AddToCart;
 import com.khurshid.kamkora.model.Order;
+import com.khurshid.kamkora.model.SubService;
 import com.khurshid.kamkora.utils.CentralData;
 import com.khurshid.kamkora.utils.ProgressBarManager;
 import com.khurshid.kamkora.utils.SessionManager;
+import com.khurshid.kamkora.view.alertdialog.DialogInfo;
 
 import org.json.JSONObject;
 
@@ -47,25 +51,42 @@ public class ServiceInfoActivity extends AppCompatActivity implements View.OnCli
     TextView tvCartCount;
     @BindView(R.id.rl_add_cart)
     RelativeLayout rlAddToCart;
+    @BindView(R.id.iv_service_info_image)
+    ImageView ivServiceInfoImage;
+    @BindView(R.id.iv_service_info_service_image)
+    ImageView ivSubServiceImage;
     private String stService, stRate, stUserId, stToken;
 
     private AddToCart addToCart;
+    private SubService subService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_info);
         ButterKnife.bind(this);
+        subService = (SubService) getIntent().getSerializableExtra("subServiceObject");
         initView();
+        fakeNetworkCall();
+
+    }
+
+    private void fakeNetworkCall() {
 
     }
 
     private void initView() {
-        stService = getIntent().getStringExtra("service");
-        stRate = getIntent().getStringExtra("rate");
+//        stService = getIntent().getStringExtra("service");
+//        stRate = getIntent().getStringExtra("rate");
         pb = findViewById(R.id.pbOrder);
-        tvTitle.setText("Service: " + stService);
-        tvRate.setText("Rate: " + stRate + " per hour");
+        if (subService != null) {
+            tvTitle.setText(subService.getName());
+            tvRate.setText(subService.getRate() + " per hour");
+            ivServiceInfoImage.setImageResource(subService.getSampleImageCarousel());
+            ivSubServiceImage.setImageResource(subService.getSampleImage());
+        }
+
+
         if (CentralData.getCartList() != null) {
             tvCartCount.setText(String.valueOf(CentralData.getCartList().size()));
         }
@@ -99,14 +120,19 @@ public class ServiceInfoActivity extends AppCompatActivity implements View.OnCli
 
         if (v.getId() == R.id.tv_service_add_to_cart) {
             Order order = new Order();
-            order.setRate(stRate);
-            order.setServiceId(stService);
+            order.setSubServiceName(subService.getName());
+            order.setRate(subService.getRate());
+            order.setServiceId(subService.getServiceId());
+            order.setSubServiceId(subService.getSubServiceId());
+            order.setSampleImage(subService.getSampleImage());
+            order.setStatus("pending");
             if (CentralData.getCartList().contains(order)) {
                 Toast.makeText(this, "Service already added to cart", Toast.LENGTH_SHORT).show();
             } else {
                 CentralData.getCartList().add(order);
                 int cartSize = CentralData.getCartList().size();
                 tvCartCount.setText(String.valueOf(cartSize));
+                showInfoDialog("Item Added To Cart");
                 Log.d(MYTAG, "Cart item count: " + cartSize);
             }
         }
@@ -119,10 +145,29 @@ public class ServiceInfoActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    private void showInfoDialog(String message) {
+        FragmentManager manager = getSupportFragmentManager();
+        DialogInfo dialogInfo = DialogInfo.newInstance(message);
+        dialogInfo.show(manager, "DialogInfo");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getCartCount();
+    }
+
+    private void getCartCount() {
+        int cartSize = CentralData.getCartList().size();
+        tvCartCount.setText(String.valueOf(cartSize));
+        Log.d(MYTAG, "Cart item count: " + cartSize);
+    }
+
     private void prepareParams() {
         stUserId = SessionManager.getLoggedInUserId(this);
         if (stUserId != null) {
             Intent intent = new Intent(this, CartActivity.class);
+//            intent.putExtra("subServicrObject", subService);
             startActivity(intent);
             finish();
 //            JSONObject object = new JSONObject();

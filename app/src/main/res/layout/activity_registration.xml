@@ -121,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/rounded_editetext"
-                    android:drawableLeft="@drawable/ic_phone"
+                    android:drawableLeft="@drawable/ic_baseline_phone_android_24"
                     android:hint="Mobile"
                     android:inputType="phone"
                     android:padding="12dp"

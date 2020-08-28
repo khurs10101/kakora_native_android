@@ -37,4 +37,12 @@ public interface UserService {
 
     @POST(ApiClient.APPEND_URL_ADDRESS + "add/{id}")
     Call<JsonObject> setUserAddress(@Path("id") String userId, @Body JsonObject object);
+
+    //Services
+    @GET(ApiClient.APPEND_URL_SERVICE + "")
+    Call<JsonObject> getAllServices(@Header("x-access-token") String token);
+
+    //Home Ads
+    @GET(ApiClient.APPEND_URL_ADS + "")
+    Call<JsonObject> getHomeAds(@Header("x-access-token") String token);
 }

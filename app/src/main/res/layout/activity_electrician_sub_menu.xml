@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,15 +12,190 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="462dp"
-            android:layout_height="300dp"
-            android:src="@drawable/electrician_non" />
+        <com.synnapps.carouselview.CarouselView
+            android:id="@+id/cv_electrician"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            app:fillColor="#FFFFFFFF"
+            app:pageColor="#00000000"
+            app:radius="6dp"
+            app:slideInterval="3000"
+            app:strokeColor="#FF777777"
+            app:strokeWidth="1dp" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp">
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginRight="8dp"
+            android:elevation="6dp"
+            android:gravity="center">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_sub_electrician"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="15dp">-->
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:orientation="vertical">-->
+
+        <!--                <TextView-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:fontFamily="@font/coresans_cr_medium"-->
+        <!--                    android:padding="8dp"-->
+        <!--                    android:text="Get 40% off on all repairs"-->
+        <!--                    android:textSize="25sp"-->
+        <!--                    android:textStyle="bold" />-->
+
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:orientation="horizontal"-->
+        <!--                    android:padding="15dp"-->
+        <!--                    android:weightSum="2">-->
+
+        <!--                    <LinearLayout-->
+        <!--                        android:id="@+id/lvSwitchRepair"-->
+        <!--                        android:layout_width="200dp"-->
+        <!--                        android:layout_height="200dp"-->
+        <!--                        android:layout_weight="1"-->
+        <!--                        android:orientation="vertical">-->
+
+        <!--                        <ImageView-->
+        <!--                            android:layout_width="150dp"-->
+        <!--                            android:layout_height="150dp"-->
+        <!--                            android:layout_gravity="center"-->
+        <!--                            android:src="@drawable/ic_switchboard" />-->
+
+        <!--                        <TextView-->
+        <!--                            android:layout_width="match_parent"-->
+        <!--                            android:layout_height="wrap_content"-->
+        <!--                            android:gravity="center"-->
+        <!--                            android:text="Switchboard repair"-->
+        <!--                            android:textSize="20sp"-->
+        <!--                            android:textStyle="bold" />-->
+
+        <!--                    </LinearLayout>-->
+
+        <!--                    <LinearLayout-->
+        <!--                        android:id="@+id/lvHomeAppliancesRepair"-->
+        <!--                        android:layout_width="200dp"-->
+        <!--                        android:layout_height="200dp"-->
+        <!--                        android:layout_weight="1"-->
+        <!--                        android:orientation="vertical">-->
+
+        <!--                        <ImageView-->
+        <!--                            android:layout_width="150dp"-->
+        <!--                            android:layout_height="150dp"-->
+        <!--                            android:layout_gravity="center"-->
+        <!--                            android:src="@drawable/ic_electricity" />-->
+
+        <!--                        <TextView-->
+        <!--                            android:layout_width="match_parent"-->
+        <!--                            android:layout_height="wrap_content"-->
+        <!--                            android:gravity="center"-->
+        <!--                            android:text="Home appliances"-->
+        <!--                            android:textSize="20sp"-->
+        <!--                            android:textStyle="bold" />-->
+        <!--                    </LinearLayout>-->
+
+
+        <!--                </LinearLayout>-->
+
+        <!--                <LinearLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:orientation="horizontal"-->
+        <!--                    android:padding="15dp"-->
+        <!--                    android:weightSum="2">-->
+
+        <!--                    <LinearLayout-->
+        <!--                        android:id="@+id/lvHomeWiringRepair"-->
+        <!--                        android:layout_width="200dp"-->
+        <!--                        android:layout_height="200dp"-->
+        <!--                        android:layout_weight="1"-->
+        <!--                        android:orientation="vertical">-->
+
+        <!--                        <ImageView-->
+        <!--                            android:layout_width="150dp"-->
+        <!--                            android:layout_height="150dp"-->
+        <!--                            android:layout_gravity="center"-->
+        <!--                            android:src="@drawable/ic_plug" />-->
+
+        <!--                        <TextView-->
+        <!--                            android:layout_width="match_parent"-->
+        <!--                            android:layout_height="wrap_content"-->
+        <!--                            android:gravity="center"-->
+        <!--                            android:text="Home wiring"-->
+        <!--                            android:textSize="20sp"-->
+        <!--                            android:textStyle="bold" />-->
+        <!--                    </LinearLayout>-->
+
+        <!--                    <LinearLayout-->
+        <!--                        android:id="@+id/lvSolarPanelInstall"-->
+        <!--                        android:layout_width="200dp"-->
+        <!--                        android:layout_height="200dp"-->
+        <!--                        android:layout_weight="1"-->
+        <!--                        android:orientation="vertical">-->
+
+        <!--                        <ImageView-->
+        <!--                            android:layout_width="150dp"-->
+        <!--                            android:layout_height="150dp"-->
+        <!--                            android:layout_gravity="center"-->
+        <!--                            android:src="@drawable/ic_electrician" />-->
+
+        <!--                        <TextView-->
+        <!--                            android:layout_width="match_parent"-->
+        <!--                            android:layout_height="wrap_content"-->
+        <!--                            android:gravity="center"-->
+        <!--                            android:text="Solar panel installation"-->
+        <!--                            android:textSize="20sp"-->
+        <!--                            android:textStyle="bold" />-->
+
+        <!--                    </LinearLayout>-->
+
+
+        <!--                </LinearLayout>-->
+
+
+        <!--            </LinearLayout>-->
+
+
+        <!--        </androidx.cardview.widget.CardView>-->
+
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="20dp">-->
+
+        <!--            <ImageView-->
+        <!--                android:layout_width="400dp"-->
+        <!--                android:layout_height="200dp"-->
+        <!--                android:layout_marginLeft="10dp"-->
+        <!--                android:layout_marginRight="10dp"-->
+        <!--                android:src="@drawable/ads1" />-->
+        <!--        </androidx.cardview.widget.CardView>-->
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="15dp"
+            android:elevation="5dp"
+            app:cardCornerRadius="4dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -29,153 +205,95 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:fontFamily="@font/coresans_cr_medium"
-                    android:padding="8dp"
-                    android:text="Get 40% off on all repairs"
-                    android:textSize="25sp"
+                    android:padding="5dp"
+                    android:text="Get the latest offer and upto 40% off this month"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <LinearLayout
+                <ImageView
+                    android:layout_width="380dp"
+                    android:layout_height="180dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/ads3" />
+
+                <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="15dp"
-                    android:weightSum="2">
-
-                    <LinearLayout
-                        android:id="@+id/lvSwitchRepair"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_switchboard" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Switchboard repair"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/lvHomeAppliancesRepair"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_electricity" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Home appliances"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="15dp"
-                    android:weightSum="2">
-
-                    <LinearLayout
-                        android:id="@+id/lvHomeWiringRepair"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_plug" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Home wiring"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/lvSolarPanelInstall"
-                        android:layout_width="200dp"
-                        android:layout_height="200dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_electrician" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Solar panel installation"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/button_outline"
+                    android:padding="8dp"
+                    android:text="Know More"
+                    android:textColor="@color/navy_blue" />
             </LinearLayout>
-
-
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="15dp"
+            android:elevation="5dp"
+            app:cardCornerRadius="4dp">
 
-            <ImageView
-                android:layout_width="400dp"
-                android:layout_height="200dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/ads1" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/coresans_cr_medium"
+                    android:padding="5dp"
+                    android:text="Get the latest offer and upto 40% off this month"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="380dp"
+                    android:layout_height="180dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/ads1" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/button_outline"
+                    android:padding="8dp"
+                    android:text="Know More"
+                    android:textColor="@color/navy_blue" />
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
+        <!--        <androidx.cardview.widget.CardView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="20dp">-->
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-
-            <ImageView
-                android:layout_width="400dp"
-                android:layout_height="200dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/ads2" />
-        </androidx.cardview.widget.CardView>
+        <!--            <ImageView-->
+        <!--                android:layout_width="400dp"-->
+        <!--                android:layout_height="200dp"-->
+        <!--                android:layout_marginLeft="10dp"-->
+        <!--                android:layout_marginRight="10dp"-->
+        <!--                android:src="@drawable/ads2" />-->
+        <!--        </androidx.cardview.widget.CardView>-->
     </LinearLayout>
 
 </ScrollView>

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -34,6 +35,8 @@ public class SelectAddressActivity extends AppCompatActivity implements View.OnC
     RecyclerView rv;
     @BindView(R.id.tv_add_new_address)
     TextView btAddNewAddress;
+    @BindView(R.id.sr_address_select)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     private SelectAddressRecyclerViewAdapter addressRecyclerViewAdapter;
 
@@ -47,10 +50,14 @@ public class SelectAddressActivity extends AppCompatActivity implements View.OnC
 
     private void initView() {
         btAddNewAddress.setOnClickListener(this);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            networkCall();
+        });
         networkCall();
     }
 
     private void networkCall() {
+        swipeRefreshLayout.setRefreshing(true);
         if (SessionManager.isLoggedIn(this)) {
             String userId = SessionManager.getLoggedInUserId(this);
             String token = SessionManager.getToken(this);
@@ -58,6 +65,7 @@ public class SelectAddressActivity extends AppCompatActivity implements View.OnC
             call.enqueue(new Callback<JsonObject>() {
                 @Override
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                    swipeRefreshLayout.setRefreshing(false);
                     if (response.code() == 200) {
                         Gson gson = new Gson();
                         AddressModelResponse addressModelResponse;
@@ -73,6 +81,7 @@ public class SelectAddressActivity extends AppCompatActivity implements View.OnC
 
                 @Override
                 public void onFailure(Call<JsonObject> call, Throwable t) {
+                    swipeRefreshLayout.setRefreshing(false);
                     Log.d(MYTAG, "Error: " + t.getMessage());
                 }
             });

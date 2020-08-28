@@ -2,7 +2,6 @@ package com.khurshid.kamkora.view.adapters;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.khurshid.kamkora.R;
+import com.khurshid.kamkora.model.Ads;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,18 +22,13 @@ import java.util.List;
 public class AdRecyclerViewAdapter extends RecyclerView.Adapter<AdRecyclerViewAdapter.MyViewHolder> {
 
     private static final String MYTAG = AdRecyclerViewAdapter.class.getSimpleName();
-    List<Integer> myList = new ArrayList<>();
+    private List<Ads> adsList = new ArrayList<>();
     private double screenWidth;
     private Context context;
 
-    public AdRecyclerViewAdapter(Context context) {
+    public AdRecyclerViewAdapter(Context context, List<Ads> adsList) {
         this.context = context;
-
-        myList.add(R.drawable.ads1);
-        myList.add(R.drawable.ads2);
-        myList.add(R.drawable.ads3);
-
-        Log.d(MYTAG, "AdsRecycler is called");
+        this.adsList = adsList;
 
     }
 
@@ -57,18 +52,20 @@ public class AdRecyclerViewAdapter extends RecyclerView.Adapter<AdRecyclerViewAd
 
     @Override
     public int getItemCount() {
-        return myList.size();
+        return adsList.size();
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
+        Ads ads = adsList.get(position);
 
         double itemWidth = screenWidth / 1.2;
         ViewGroup.LayoutParams lp = holder.cardView.getLayoutParams();
         lp.height = lp.height;
         lp.width = (int) itemWidth;
         holder.itemView.setLayoutParams(lp);
-        holder.ivAds.setImageResource(myList.get(position));
+        holder.ivAds.setImageResource(ads.getSampleImage());
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
