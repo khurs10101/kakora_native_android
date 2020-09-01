@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,6 +35,8 @@ import com.khurshid.kamkora.view.activities.MapLocationPickerActivity;
 import com.khurshid.kamkora.view.adapters.AdRecyclerViewAdapter;
 import com.khurshid.kamkora.view.adapters.HomeFragmentServiceRecyclerAdapter;
 import com.khurshid.kamkora.view.adapters.HomeFragmentSquareAdsRecyclerView;
+import com.khurshid.kamkora.view.alertdialog.DialogInfo;
+import com.khurshid.kamkora.view.alertdialog.DialogLocation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +61,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private List<Ads> adsList;
     private List<Ads> squareAdsList;
     private HomeFragmentSquareAdsRecyclerView homeFragmentSquareAdsRecyclerView;
+    private FragmentManager fragmentManager;
 
     @Nullable
     @Override
@@ -68,6 +72,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initView(View v) {
+        fragmentManager = getActivity().getSupportFragmentManager();
         recyclerView = v.findViewById(R.id.rvAdsRecyclerView);
         rvSquareAds = v.findViewById(R.id.rv_square_ads);
         rvServices = v.findViewById(R.id.rv_home_service);
@@ -289,8 +294,26 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     }
 
                     tvSelectLocation.setText(newLoc);
+                    isLocationValid(currentLocationSubList);
+
                 }
             }
+        }
+    }
+
+    private void isLocationValid(List<String> currentLocationSubList) {
+        String city = currentLocationSubList.get(currentLocationSubList.size() - 3);
+        Log.d(MYTAG, "isLocationValid city: " + city);
+        if (city.trim().equals("Shillong") ||
+                city.trim().equals("Guwahati")
+        ) {
+            DialogInfo
+                    .newInstance("Selected City " + city)
+                    .show(fragmentManager, "InfoDialog");
+        } else {
+            DialogLocation
+                    .newInstance(HomeFragment.this, "Currenty not available in " + city)
+                    .show(fragmentManager, "");
         }
     }
 }

@@ -61,10 +61,17 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="click here to select photo"
+                    android:textColor="@color/colorWhite" />
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/iv_profile_fragment_avatar"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
+                    android:layout_marginTop="8dp"
                     android:src="@drawable/ic_user" />
 
                 <TextView
@@ -76,6 +83,16 @@
                     android:text="Swami Nityanadan"
                     android:textColor="@color/colorWhite"
                     android:textSize="25sp" />
+
+                <ImageView
+                    android:id="@+id/iv_profile_edit_name"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_edit"
+                    app:tint="@color/colorWhite" />
+
 
             </LinearLayout>
 
@@ -121,7 +138,7 @@
 
                         <TextView
                             android:id="@+id/tvProfileEmail"
-                            android:layout_width="match_parent"
+                            android:layout_width="250dp"
                             android:layout_height="40dp"
                             android:layout_marginLeft="10dp"
                             android:fontFamily="@font/coresans_cr_medium"
@@ -129,6 +146,14 @@
                             android:text="Helloworld@gmail.com"
                             android:textColor="@color/navy_blue"
                             android:textSize="18sp" />
+
+                        <ImageView
+                            android:id="@+id/iv_profile_edit_email"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_edit" />
+
 
                     </LinearLayout>
 
@@ -157,7 +182,7 @@
 
                         <TextView
                             android:id="@+id/tvProfileNumber"
-                            android:layout_width="match_parent"
+                            android:layout_width="250dp"
                             android:layout_height="40dp"
                             android:layout_marginLeft="10dp"
                             android:fontFamily="@font/coresans_cr_medium"
@@ -165,6 +190,13 @@
                             android:text="1234567890"
                             android:textColor="@color/navy_blue"
                             android:textSize="18sp" />
+
+                        <ImageView
+                            android:id="@+id/iv_profile_edit_phone"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_edit" />
 
                     </LinearLayout>
 
@@ -194,7 +226,7 @@
 
                         <TextView
                             android:id="@+id/tvProfileGender"
-                            android:layout_width="match_parent"
+                            android:layout_width="250dp"
                             android:layout_height="40dp"
                             android:layout_marginLeft="10dp"
                             android:fontFamily="@font/coresans_cr_medium"
@@ -202,6 +234,13 @@
                             android:text="Male"
                             android:textColor="@color/navy_blue"
                             android:textSize="18sp" />
+
+                        <ImageView
+                            android:id="@+id/iv_profile_edit_gender"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_edit" />
 
                     </LinearLayout>
 
@@ -230,7 +269,7 @@
 
                         <TextView
                             android:id="@+id/tvProfileAge"
-                            android:layout_width="match_parent"
+                            android:layout_width="250dp"
                             android:layout_height="40dp"
                             android:layout_marginLeft="10dp"
                             android:fontFamily="@font/coresans_cr_medium"
@@ -238,6 +277,13 @@
                             android:text="25"
                             android:textColor="@color/navy_blue"
                             android:textSize="18sp" />
+
+                        <ImageView
+                            android:id="@+id/iv_profile_edit_age"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/ic_edit" />
 
                     </LinearLayout>
 
@@ -269,27 +315,27 @@
                     <!--                android:padding="10dp"-->
                     <!--                android:textSize="25sp" />-->
 
-                    <Button
-                        android:id="@+id/bt_profile_edit"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginRight="20dp"
-                        android:background="@drawable/rounded_green2"
-                        android:text="Edit"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="20sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView"
-                        app:layout_constraintVertical_bias="0.042"
-                        tools:layout_editor_absoluteX="20dp" />
+                    <!--                    <Button-->
+                    <!--                        android:id="@+id/bt_profile_edit"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginLeft="20dp"-->
+                    <!--                        android:layout_marginTop="30dp"-->
+                    <!--                        android:layout_marginRight="20dp"-->
+                    <!--                        android:background="@drawable/rounded_green2"-->
+                    <!--                        android:text="Edit"-->
+                    <!--                        android:textColor="@color/colorWhite"-->
+                    <!--                        android:textSize="20sp"-->
+                    <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--                        app:layout_constraintTop_toBottomOf="@+id/textView"-->
+                    <!--                        app:layout_constraintVertical_bias="0.042"-->
+                    <!--                        tools:layout_editor_absoluteX="20dp" />-->
 
                     <Button
                         android:id="@+id/bt_profile_logout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
+                        android:layout_margin="25dp"
                         android:background="@drawable/rounded_green2"
                         android:text="Log Out"
                         android:textColor="@color/colorWhite"

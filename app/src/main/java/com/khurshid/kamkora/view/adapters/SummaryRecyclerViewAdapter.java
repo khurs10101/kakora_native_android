@@ -40,7 +40,7 @@ public class SummaryRecyclerViewAdapter extends RecyclerView.Adapter<SummaryRecy
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        holder.tvService.setText(orderList.get(position).getServiceId());
+        holder.tvService.setText(orderList.get(position).getSubServiceName());
         holder.tvRate.setText("Rate: Rs. " + orderList.get(position).getRate() + " per hour");
         holder.ivServiceImage.setImageResource(orderList.get(position).getSampleImage());
 

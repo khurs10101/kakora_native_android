@@ -86,7 +86,7 @@ public class ElectricianSubMenuActivity extends AppCompatActivity implements Vie
             String[] names = {"Wedding", "Birthday", "Corporate", "Movies"};
             int[] images = {R.drawable.ic_bride, R.drawable.ic_birthday,
                     R.drawable.ic_teamwork, R.drawable.ic_clapperboard};
-            int[] subServiceId = {21, 22, 33, 44};
+            int[] subServiceId = {21, 22, 23, 24};
             int[] subServiceRate = {100, 150, 200, 250};
             for (int i = 0; i < names.length; i++) {
                 SubService subService = new SubService();

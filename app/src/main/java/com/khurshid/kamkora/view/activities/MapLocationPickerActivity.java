@@ -22,6 +22,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -37,6 +38,8 @@ import com.google.android.libraries.places.api.model.PlaceLikelihood;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.khurshid.kamkora.R;
 import com.khurshid.kamkora.model.LocalLocation;
 
@@ -67,6 +70,32 @@ public class MapLocationPickerActivity extends AppCompatActivity implements OnMa
     private LatLng[] mLikelyPlaceLatLngs;
     private Context context;
     private Activity activity;
+    private AutocompleteSupportFragment autocompleteSupportFragment;
+
+    private PlaceSelectionListener placeSelectionListener = new PlaceSelectionListener() {
+        @Override
+        public void onPlaceSelected(@NonNull Place place) {
+            String address = place.getAddress();
+//            Double latitude = place.getLatLng().latitude;
+//            Double longitude = place.getLatLng().longitude;
+            Log.d(MYTAG, "Autocomplete address: " + address);
+            LocalLocation localLocation = new LocalLocation();
+            localLocation.setLikelyAddress(address);
+//            localLocation.setLatitude(latitude);
+//            localLocation.setLongitude(longitude);
+            Intent intent = new Intent();
+            intent.putExtra("getLocation", localLocation.getLikelyAddress());
+            intent.putExtra("getLocationObject", localLocation);
+            activity.setResult(RESULT_OK, intent);
+            activity.finish();
+
+        }
+
+        @Override
+        public void onError(@NonNull Status status) {
+            Log.d(MYTAG, "AutoComplete error: " + status.getStatusMessage());
+        }
+    };
 
     private AdapterView.OnItemClickListener listClickedHandler =
             (parent, view, position, id) -> {
@@ -116,6 +145,18 @@ public class MapLocationPickerActivity extends AppCompatActivity implements OnMa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        // Initialize the AutocompleteSupportFragment.
+        autocompleteSupportFragment = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+
+        autocompleteSupportFragment
+                .setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.ADDRESS, Place.Field.LAT_LNG));
+
+
+        autocompleteSupportFragment
+                .setOnPlaceSelectedListener(placeSelectionListener);
+
 
         // Set up the action toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);

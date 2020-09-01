@@ -34,7 +34,7 @@ public class BookingRecyclerViewAdapter extends RecyclerView.Adapter<BookingRecy
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         String stDocketId = orders.get(position).getDocketId();
-        String stService = orders.get(position).getServiceId();
+        String stService = orders.get(position).getSubServiceName();
         String stRate = orders.get(position).getRate();
         String stStatus = orders.get(position).getStatus();
 

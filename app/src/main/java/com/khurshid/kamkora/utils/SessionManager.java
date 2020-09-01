@@ -130,5 +130,24 @@ public class SessionManager {
         return null;
     }
 
+    public static void setUserObject(Context context, User user) {
+        sharedPreferences = context.getSharedPreferences(SessionManager.AUTH, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(user, User.class);
+        editor.putString(SessionManager.USEROBJECT, json);
+        editor.commit();
+    }
+
+    public static User getUserObject(Context context) {
+        sharedPreferences = context.getSharedPreferences(SessionManager.AUTH, Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        if (sharedPreferences != null) {
+            String json = sharedPreferences.getString(SessionManager.USEROBJECT, null);
+            User user = gson.fromJson(json, User.class);
+            return user;
+        }
+        return null;
+    }
 
 }

@@ -126,6 +126,8 @@ public class ServiceInfoActivity extends AppCompatActivity implements View.OnCli
             order.setSubServiceId(subService.getSubServiceId());
             order.setSampleImage(subService.getSampleImage());
             order.setStatus("pending");
+            Log.d(MYTAG, "Cart service and subservice: "
+                    + order.getServiceId() + " " + order.getSubServiceId());
             if (CentralData.getCartList().contains(order)) {
                 Toast.makeText(this, "Service already added to cart", Toast.LENGTH_SHORT).show();
             } else {

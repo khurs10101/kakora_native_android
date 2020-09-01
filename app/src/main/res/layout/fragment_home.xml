@@ -73,7 +73,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:background="@color/colorPrimary"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <EditText
                 android:id="@+id/etSearchBar"
@@ -93,7 +94,7 @@
             android:id="@+id/rvAdsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="10dp"
             android:padding="8dp" />
 
         <ImageView

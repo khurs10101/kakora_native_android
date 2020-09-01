@@ -40,6 +40,17 @@ public class User implements Serializable {
     @SerializedName("updatedAt")
     @Expose
     private String updatedAt;
+    @SerializedName("age")
+    @Expose
+    private String age;
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
 
     public String getUpdatedAt() {
         return updatedAt;

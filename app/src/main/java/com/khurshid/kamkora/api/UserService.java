@@ -2,11 +2,14 @@ package com.khurshid.kamkora.api;
 
 import com.google.gson.JsonObject;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface UserService {
@@ -17,6 +20,18 @@ public interface UserService {
 
     @POST(ApiClient.APPEND_URL_USER + "signup")
     Call<JsonObject> getSignUp(@Body JsonObject object);
+
+    @POST(ApiClient.APPEND_URL_USER + "edit/{id}")
+    Call<JsonObject> updateUserDetails(@Path("id") String userId, @Body JsonObject object);
+
+    @Multipart
+    @POST(ApiClient.APPEND_URL_USER + "avatar/{id}")
+    Call<JsonObject> uploadUserAvatar(@Path("id") String userId, @Part MultipartBody.Part part);
+
+    //avatar
+    @GET(ApiClient.APPEND_URL_USER + "avatar/{id}")
+    Call<JsonObject> loadAvatar(@Path("id") String userId);
+
 
     //orders
     @POST(ApiClient.APPEND_URL_ORDER + "add/{id}")

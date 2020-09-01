@@ -32,7 +32,6 @@ public class Order implements Serializable {
     @SerializedName("docketId")
     @Expose
     private String docketId;
-
     private String subServiceId;
 
     private String url;

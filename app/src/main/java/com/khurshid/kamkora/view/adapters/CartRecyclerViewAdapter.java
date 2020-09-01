@@ -33,7 +33,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.tvService.setText(orders.get(position).getServiceId());
+        holder.tvService.setText(orders.get(position).getSubServiceName());
         holder.tvRate.setText("Rs " + orders.get(position).getRate() + " per hour");
         holder.ivImage.setImageResource(orders.get(position).getSampleImage());
         holder.ivRemove.setOnClickListener(v -> {
